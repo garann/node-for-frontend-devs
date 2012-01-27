@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Customize some widgets</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <h1>Customize some widgets</h1>
+
+    <form action="/theme" method="POST">
+    	<select name="mainColor">
+    		<option>#f00</option>
+    		<option>#0f0</option>
+    		<option>#00f</option>
+		</select>
+		<select name="secondaryColor">
+    		<option>#ff0</option>
+    		<option>#0ff</option>
+    		<option>#f0f</option>
+		</select>
+		<select name="borderStyle">
+    		<option>solid</option>
+    		<option>dotted</option>
+    		<option>dashed</option>
+		</select>
+		<input type="text" name="borderRadius" placeholder="border radius" />
+    	<input type="submit" value="Customize CSS" />
+	</form>
+
+	<form action="/builder" method="POST">
+    	HTML5 shim: Use <input type="radio" name="html5shim" value="true" /> Don't use <input type="radio" name="html5shim" value="false" /><br/>
+    	Flash: Use <input type="radio" name="useFlash" value="true" /> Don't use <input type="radio" name="useFlash" value="false" /><br/>
+    	Websockets: Use <input type="radio" name="useWebSockets" value="true" /> Don't use <input type="radio" name="useWebSockets" value="false" /><br/>
+    	JSONP: Use <input type="radio" name="useJsonp" value="true" /> Don't use <input type="radio" name="useJsonp" value="false" /><br/> 
+    	<input type="submit" value="Customize JS" />
+	</form>
+	
+  </body>
+</html>

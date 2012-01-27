@@ -1,0 +1,18 @@
+- if (username.length) 
+	h1= username
+- else 
+	form(action="/save",method="POST")
+		input#hdnId(name="hdnId", type="hidden", value=user.id)
+		input#txtFirstName(name="txtFirstName", type="text", value=user.firstName)
+		input#txtLastName(name="txtLastName", type="text", value=user.lastName)
+		input#btnGetName(type="button", value="Save")
+		input#btnDelete(type="button", value="Delete User")
+	script
+		document.getElementById("btnGetName").addEventListener("click", function() {
+			this.parentNode.submit();
+		});
+		document.getElementById("btnDelete").addEventListener("click", function() {
+			var form = this.parentNode;
+			this.parentNode.action = "/delete/" + document.getElementById("hdnId").value;
+			this.parentNode.submit();
+		});
