@@ -3,12 +3,10 @@ var http = require("http"),
   querystring = require("querystring");  
   
 http.createServer(function(req, res) {
-  var data = "",
-    params,
-    userName;
+  var data = "";
 
   if (req.method == "GET") {
-    getFile(__dirname + "/public/dumbForm.html", res);
+    getFile(__dirname + "/public/simpleForm.html", res);
   }
     
   if (req.method == "POST") {
@@ -16,29 +14,20 @@ http.createServer(function(req, res) {
       data += chunk;
     });
     req.on("end", function() {
-      params = querystring.parse(data);
+      var params = querystring.parse(data),
       userName = params.firstName + " " + params.lastName,
-        page = ["<!doctype html>",
-          "<html><head><title>Hello " + userName + "</title></head>",
-          "<body><h1>Hello, " + userName + "!</h1></body></html>"]
-        html = page.join("");
+        html = "<!doctype html>" +
+          "<html><head><title>Hello " + userName + "</title></head>" +
+          "<body><h1>Hello, " + userName + "!</h1></body></html>";
         
-      res.writeHead(200, {
-        "Content-Type": "text/html",
-        "Content-Length": html.length
-      });
       res.end(html);
     });
   }
-}).listen(8000, "127.0.0.1");
+}).listen(8000);
 
 function getFile(localPath, res) {
   fs.readFile(localPath, function(err, contents) {
     if (!err) {
-      res.writeHead(200, {
-        "Content-Type": "text/html",
-        "Content-Length": contents.length
-      });
       res.end(contents);
     } else {
       res.writeHead(500);
