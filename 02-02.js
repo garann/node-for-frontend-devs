@@ -11,7 +11,6 @@ http.createServer(function(req, res) {
   if (ext == ".html") {
     localPath += filename;
     path.exists(localPath, function(exists) {
-      console.log("exists")
       if (exists) {
         getFile(localPath, res);
       } else {
