@@ -33,10 +33,6 @@ function render(res, filename, data, style, script, callback) {
         {content: data}, 
         {content: tmpl, stylesheets: style || "", scripts: script || ""}
       );
-      res.writeHead(200, {
-        "Content-Type": "text/html",
-        "Content-Length": html.length
-      });
       res.end(html);
     }
   });

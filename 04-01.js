@@ -1,29 +1,29 @@
 var connect = require("connect"),
   fs = require("fs"),
-  mustache = require("mustache"),
-  requirejs = require("requirejs");
+  mustache = require("mustache");
 
-requirejs.config({ nodeRequire: require });
-      
 connect(
   connect.bodyParser(),
   function(req, res) {
     var userName = {
-        firstName: "Garann",
-        lastName: "Means"
+        firstName: req.body.firstName,
+        lastName: req.body.lastName
       },
+      // create and open the stream
+      tmplFile = fs.createReadStream(
+        __dirname + "/public/edit.html",
+        {encoding: "utf8"}
+      ),
+      template = "",
       html;
-      
-    requirejs(["text!public/edit.html"],
-      function(template) {
-        html = mustache.to_html(template, userName);
-        
-        res.writeHead(200, {
-          // testing!!
-          "Content-Type": "text/html",
-          "Content-Length": html.length
-        });
-        res.end(html);
+
+    tmplFile.on("data", function(data) {
+      template += data;
+    });
+    tmplFile.on("end", function() {
+      // render the template with the userName object as data
+      html = mustache.to_html(template, userName);
+      res.end(html);
     });
   }
 ).listen(8000);
