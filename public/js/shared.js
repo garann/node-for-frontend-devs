@@ -3,4 +3,4 @@
     console.log("works!");
   };
   return ns;
-}(typeof exports === "undefined" ? myapp : exports));
+}((typeof process !== "undefined" && process.title === "node") ? exports : myapp));
