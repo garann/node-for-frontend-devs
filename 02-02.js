@@ -20,15 +20,11 @@ http.createServer(function(req, res) {
     });
   }
   
-}).listen(8000, "127.0.0.1");
+}).listen(8000);
       
 function getFile(localPath, res) {
   fs.readFile(localPath, function(err, contents) {
     if (!err) {
-      res.writeHead(200, {
-        "Content-Type": "text/html",
-        "Content-Length": contents.length
-      });
       res.end(contents);
     } else {
       res.writeHead(500);
