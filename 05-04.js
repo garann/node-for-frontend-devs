@@ -18,15 +18,10 @@ connect(
       
     stream.on("open", function() {
       stream.end((firstName + "," + lastName + "\n"), "utf-8");    
-      var page = ["<!doctype html>",
-        "<html><head><title>Hello " + userName + "</title></head>",
-        "<body><h1>Hello, " + userName + "!</h1></body></html>"],
-        html = page.join("");
+      var html = "<!doctype html>" +
+        "<html><head><title>Hello " + userName + "</title></head>" +
+        "<body><h1>Hello, " + userName + "!</h1></body></html>";
         
-      res.writeHead(200, {
-        "Content-Type": "text/html",
-        "Content-Length": html.length
-      });
       res.end(html);
     });
   }
